@@ -1,0 +1,7 @@
+Style/ExtraSpacing:
+  AllowForAlignment: true
+
+
+Style/SpaceBeforeComma:
+  Description: 'No spaces before commas.'
+  Enabled: false

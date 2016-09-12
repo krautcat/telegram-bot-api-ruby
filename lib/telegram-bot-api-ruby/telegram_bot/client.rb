@@ -1,6 +1,6 @@
 module TelegramBot
   class Bot
-    API_URL = 'https://api.telegram.com'
+    API_URL = 'https://api.telegram.com'.freeze
 
     def initialize(args = {})
       # compatibility with just passing a token
@@ -16,4 +16,5 @@ module TelegramBot
       @connection = Excon.new(API_URL, persistent: true, proxy: @proxy)
     end
 
-
+  end
+end
