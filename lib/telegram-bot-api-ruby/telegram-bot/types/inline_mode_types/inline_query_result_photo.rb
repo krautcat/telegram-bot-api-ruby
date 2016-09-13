@@ -1,10 +1,8 @@
 module TelegramBot
   module Types
 
-    class InlineQueryResultPhoto < InlineModeBaseType
+    class InlineQueryResultPhoto < InlineQueryResultBaseType
 
-      attribute :type                   , String
-      attribute :id                     , String
       attribute :photo_url              , String
       attribute :thumb_url              , String
       attribute :photo_width            , Integer
@@ -12,8 +10,6 @@ module TelegramBot
       attribute :title                  , String
       attribute :description            , String
       attribute :caption                , String
-      attribute :reply_markup           , InlineKeyboardMarkup
-      attribute :input_message_content  , InputMessageContent
 
     end
 

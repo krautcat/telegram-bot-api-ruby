@@ -1,13 +1,12 @@
 module TelegramBot
   module Types
 
-    class InlineQueryResultCachedAudio < InlineModeBaseType
+    class InlineQueryResultBaseType < InlineModeBaseType
 
       attribute :type                   , String
       attribute :id                     , String
-      attribute :audio_file_id          , String
+      attribute :input_messae_content   , InlineMessageContent
       attribute :reply_markup           , InlineKeyboardMarkup
-      attribute :input_message_content  , InputMessageContent
 
     end
 

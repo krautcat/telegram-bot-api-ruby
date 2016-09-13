@@ -1,10 +1,8 @@
 module TelegramBot
   module Types
 
-    class InlineQueryResultVideo < InlineModeBaseType
+    class InlineQueryResultVideo < InlineQueryResultBaseType
 
-      attribute :type                   , String
-      attribute :id                     , String
       attribute :video_url              , String
       attribute :mime_type              , String
       attribute :thumb_url              , String
@@ -14,8 +12,6 @@ module TelegramBot
       attribute :video_height           , Integer
       attribute :video_duration         , Integer
       attribute :description            , String
-      attribute :reply_markup           , InlineKeyboardMarkup
-      attribute :input_message_content  , InputMessageContent
 
     end
 

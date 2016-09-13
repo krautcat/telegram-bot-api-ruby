@@ -9,10 +9,7 @@ Gem::Specification.new do |spec|
   spec.summary       = "Tiny Ruby wrapper for Telegram Bot API"
   spec.version	     = '0.0.1'
 
-  spec.files  	     = Dir['lib/**/*.rb'] 
-  spec.executables   = spec.files.grep(%r{^bin/}) { |f| File.basename(f) }
-  spec.test_files    = spec.files.grep(%r{^(test|spec|features)/})
-  spec.require_paths = Gem::Platform::RUBY
+  spec.files  	     = `git ls-files`.split("\n")
 
   spec.add_dependency 'virtus'
 
