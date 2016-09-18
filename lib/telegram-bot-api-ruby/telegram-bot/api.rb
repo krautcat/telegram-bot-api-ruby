@@ -52,22 +52,61 @@ module TelegramBot
     end
 
     #------------------------------------------------------#
-    # Allow calling API methods as API.methodName or       #
-    # API.method_name (i.e. supports different notations)  #
+    # Allow calling API methods in snake_case and          #
+    # camelCase                                            #
     #------------------------------------------------------#
-    def method_missing(method_name, *args)
-      endpoint = method_name.to_s
-      endpoint = camelize(endpoint) if endpoint.include?('_')
+    def method_missing(method_name, *args, &block)
+      api_method = method_name.to_s
+      api_method = camelize(api_method) if api_method.include?('_')
 
-      API_METHODS.include?(endpoint) ? call(endpoint, *args) : super
+      if API_METHODS.include?(api_method)
+        call_api_method(api_method, *args)
+      else
+        super
+      end
     end
 
 
-    def respond_to_missing?(*args)
-      method_name = args[0].to_s
-      method_name = camelize_method(method_name) if method_name.include?('_')
+    def respond_to_missing?(method_name, include_private = false)
+      api_method = method_name.to_s
+      api_method = camelize_method(api_method) if api_method.include?('_')
 
-      API_METHODS.include?(method_name) || super
+      API_METHODS.include?(api_method) || super
+    end
+
+    def call_api_method(method_name, options = {})
+      params = build_params(options)
+
+    end
+
+    private
+
+    def camelize_method(method_name)
+      method_words = method_name.split('_')
+      method_words.drop(1).map!(&:capitalize!)
+      method_words.join
+    end
+
+    def build_params(options)
+      options.each_with_object(Hash.new(0)) do |(key, value), params|
+        params[key] = checking_conveyor(value)
+      end
+    end
+
+    def checking_conveyor(value)
+      jsonify_inline_query_results(jsonify_reply_markup(value))
+    end
+
+    def jsonify_reply_markup(value)
+      return value unless REPLY_KEYBOARD_MARKUP_TYPES.include?(value.class)
+      value.to_compact_hash.to_json
+    end
+
+    def jsonify_inline_query_results(value)
+      return value unless value.is_a? && value.all? do |el|
+        INLINE_QUERY_RESULT_TYPES.include?(el.class)
+      end
+      value.map { |el| el.to_compact_hash}
     end
 
   end

@@ -1,4 +1,5 @@
 require 'virtus'
+require 'json'
 
 require 'telegram-bot-api-ruby/telegram-bot/types'
 require 'telegram-bot-api-ruby/telegram-bot/bot'

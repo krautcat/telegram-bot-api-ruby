@@ -3,9 +3,9 @@ module TelegramBot
 
     class KeyboardButton
 
-      attribute :text               , String
-      attribute :request_contact    , Boolean
-      attribute :request_location   , Boolean
+      attribute :text            , String
+      attribute :request_contact , Boolean, default: false
+      attribute :request_location, Boolean, default: false
 
     end
 

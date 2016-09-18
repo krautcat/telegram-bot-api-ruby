@@ -15,6 +15,10 @@ module TelegramBot
       @connection = Excon.new(API_URL, persistent: true, proxy: @proxy)
     end
 
+    def get_me
+      @me ||= User.new(API.getMe)
+    end
+
     def self.run(*args, &block)
       new(*args).run(&block)
     end

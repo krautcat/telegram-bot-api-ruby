@@ -3,8 +3,8 @@ module TelegramBot
 
     class ForceReply < BaseType
 
-      attribute :force_reply  , Boolean
-      attribute :selective    , Boolean   , default: false
+      attribute :force_reply, Boolean
+      attribute :selective  , Boolean, default: false
 
     end
 
